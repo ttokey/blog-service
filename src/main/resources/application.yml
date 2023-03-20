@@ -1,0 +1,10 @@
+search:
+  authorization:
+    kakao-auth: KakaoAK  cfb766ea794157a822528c71cd38ce0b
+    naver-client-id: UmS wQxTOfWrSkmxm9fUt
+    naver-client-secret: f6kNJnt1ft
+  blog:
+    kakao-url: https://dapi.kakao.com
+    kakao-path: /v2/search/blog
+    naver-url: https://openapi.naver.com
+    naver-path: /v1/search/blog.json

@@ -6,6 +6,7 @@ import com.ttokey.blog.dto.PageInfo;
 import com.ttokey.blog.dto.SearchBlogReq;
 import com.ttokey.blog.dto.SearchBlogRes;
 import com.ttokey.blog.enumeration.BlogType;
+import com.ttokey.blog.util.PageUtil;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -48,8 +49,10 @@ public class KakaoSearchBlogRes implements SearchBlog {
         String title;
         String contents;
         String url;
+        @JsonProperty("blogname")
         String blogName;
-        String datetime;
+        @JsonProperty("datetime")
+        String dateTime;
         String thumbnail;
 
         public BlogInfo toBlogInfo() {
@@ -59,16 +62,17 @@ public class KakaoSearchBlogRes implements SearchBlog {
                     .url(url)
                     .blogName(blogName)
                     .thumbnail(thumbnail)
-                    .dateTime(datetime)
+                    .dateTime(dateTime)
                     .build();
         }
     }
 
     @Override
     public SearchBlogRes toSearchBlogRes(SearchBlogReq searchBlogReq) {
+        int pageSize = PageUtil.pageSize(this.meta.getPageableCount(), searchBlogReq.getSize());
         PageInfo pageInfo = PageInfo.builder()
                 .sortType(searchBlogReq.getSortType())
-                .pageSize(this.meta.getPageableCount() / searchBlogReq.getSize())
+                .pageSize(pageSize)
                 .pageNumber(searchBlogReq.getPage())
                 .totalCount(this.meta.getPageableCount())
                 .size(this.documents.size())

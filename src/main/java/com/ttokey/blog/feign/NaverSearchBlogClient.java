@@ -7,9 +7,9 @@ import org.springframework.cloud.openfeign.SpringQueryMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "naverBlogSearchClient", url = "https://openapi.naver.com")
+@FeignClient(name = "naverBlogSearchClient", url = "${search.blog.naver-url}")
 public interface NaverSearchBlogClient {
-    @GetMapping(value = "/v1/search/blog.json")
+    @GetMapping(value = "${search.blog.naver-path}")
     NaverSearchBlogRes blogSearch(
             @SpringQueryMap NaverSearchBlogReq naverSearchBlogReq,
             @RequestHeader("X-Naver-Client-Id") String clientId,

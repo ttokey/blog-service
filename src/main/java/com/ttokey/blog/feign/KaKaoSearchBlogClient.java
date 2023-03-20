@@ -8,9 +8,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "kakaoBlogSearchClient", url = "https://dapi.kakao.com")
+@FeignClient(name = "kakaoBlogSearchClient", url = "${search.blog.kakao-url}")
 public interface KaKaoSearchBlogClient {
-    @GetMapping(value = "/v2/search/blog")
+    @GetMapping(value = "${search.blog.kakao-path}")
     KakaoSearchBlogRes blogSearch(
             @SpringQueryMap KakaoSearchBlogReq kakaoSearchBlogReq,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String authorization

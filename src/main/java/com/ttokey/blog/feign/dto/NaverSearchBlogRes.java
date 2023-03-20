@@ -6,6 +6,7 @@ import com.ttokey.blog.dto.PageInfo;
 import com.ttokey.blog.dto.SearchBlogReq;
 import com.ttokey.blog.dto.SearchBlogRes;
 import com.ttokey.blog.enumeration.BlogType;
+import com.ttokey.blog.util.PageUtil;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -57,7 +58,7 @@ public class NaverSearchBlogRes implements SearchBlog {
 
     @Override
     public SearchBlogRes toSearchBlogRes(SearchBlogReq searchBlogReq) {
-        int pageSize = this.total / searchBlogReq.getSize() + 1;
+        int pageSize = PageUtil.pageSize(this.total, searchBlogReq.getSize());
         Integer page = searchBlogReq.getPage();
         PageInfo pageInfo = PageInfo.builder()
                 .sortType(searchBlogReq.getSortType())
