@@ -42,6 +42,10 @@ dependencies {
     implementation 'org.springframework.cloud:spring-cloud-starter-openfeign' // http 통신을 위함
     implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j' // circuit breaker 작성
 
+    //retry
+    implementation 'org.springframework.retry:spring-retry:2.0.0' // 메서드 내 exception 발생 시 catch 하여 재실행
+    implementation 'org.springframework:spring-aspects:6.0.6'
+
     //database
     runtimeOnly 'com.h2database:h2'
 
