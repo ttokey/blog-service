@@ -19,7 +19,7 @@ public class SearchController {
     private final SearchService searchService;
 
     @GetMapping(value = UrlConstant.BLOG)
-    public SearchBlogRes searchBlog(@RequestParam @NotEmpty String query, @RequestParam(value = "sort") String sortType
+    public SearchBlogRes searchBlog(@RequestParam @NotEmpty String query, @RequestParam(value = "sort", defaultValue = "accuracy") String sortType
             , @RequestParam(defaultValue = "1") Integer page, @RequestParam(defaultValue = "10") Integer size) {
         SearchBlogReq searchBlogReq = SearchBlogReq.builder()
                 .query(query)

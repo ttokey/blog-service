@@ -2,6 +2,8 @@ plugins {
     id 'java'
     id 'org.springframework.boot' version '3.0.4'
     id 'io.spring.dependency-management' version '1.1.0'
+    id 'com.epages.restdocs-api-spec' version '0.17.1'
+
 }
 
 group = 'com.ttokey'
@@ -34,12 +36,11 @@ dependencies {
     //spring boot
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-    implementation 'org.springframework.boot:spring-boot-starter-validation'
-
+    implementation 'org.springframework.boot:spring-boot-starter-validation' // 필드 검증에 필요
 
     //spring cloud
-    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign'
-    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j'
+    implementation 'org.springframework.cloud:spring-cloud-starter-openfeign' // http 통신을 위함
+    implementation 'org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j' // circuit breaker 작성
 
     //database
     runtimeOnly 'com.h2database:h2'
@@ -50,8 +51,37 @@ dependencies {
 
     //test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    //swagger + restdocs
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.4' // json rest doc 혁식을 swagger로 띄우기
+    testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc' //spring rest doc 작성
+    testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.17.1' // rest doc json 으로 작성
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+openapi3 {
+    server = 'https://localhost:8080'
+    title = 'TTOKEY BLOG SERVICE'
+    description = 'ttokey s blog search service'
+    tagDescriptionsPropertiesFile = 'src/docs/tag-descriptions.yaml'
+    outputFileNamePrefix = 'ttokey-blog-api'
+    version = '0.1.0'
+    format = 'json'
+}
+
+tasks.register('copyRestDocs') {
+    dependsOn ':openapi3'
+    doLast {
+        copy {
+            from file('build/api-spec')
+            into 'src/main/resources/static/docs'
+        }
+    }
+}
+
+build {
+    dependsOn copyRestDocs
 }

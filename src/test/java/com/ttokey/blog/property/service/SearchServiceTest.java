@@ -1,4 +1,4 @@
-package com.ttokey.blog.service;
+package com.ttokey.blog.property.service;
 
 import com.ttokey.blog.dto.BlogInfo;
 import com.ttokey.blog.dto.PageInfo;
@@ -9,6 +9,7 @@ import com.ttokey.blog.enumeration.SortType;
 import com.ttokey.blog.feign.SearchBlogClient;
 import com.ttokey.blog.feign.dto.KakaoSearchBlogReq;
 import com.ttokey.blog.feign.dto.KakaoSearchBlogRes;
+import com.ttokey.blog.service.SearchService;
 import com.ttokey.blog.util.PageUtil;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
