@@ -8,6 +8,8 @@ import com.ttokey.blog.dto.BlogInfo;
 import com.ttokey.blog.dto.PageInfo;
 import com.ttokey.blog.dto.SearchBlogReq;
 import com.ttokey.blog.dto.SearchBlogRes;
+import com.ttokey.blog.dto.TopTenWordInfo;
+import com.ttokey.blog.dto.TopTenWordRes;
 import com.ttokey.blog.enumeration.BlogType;
 import com.ttokey.blog.enumeration.SortType;
 import com.ttokey.blog.service.SearchService;
@@ -24,6 +26,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -163,25 +166,88 @@ public class SearchControllerTest {
                                 .build())));
     }
 
-    public final class BlogInfoProperty {
-        public static String title1 = "본죽, 임영웅 광고 캠페인 공개 &amp; 할인 프로모션";
-        public static String contents1 = "판매 수익금 기부, <b>카카오</b>톡 채널 추가 쿠폰 증정  https://naver.me/G5QhNN4b 본죽, 임영웅 광고 캠페인 공개 &amp; 할인 프로모션 본죽이 브랜드 모델 임영웅과 함께 한 광고를 공개하고 2주간 할인 행사를 진행한다고 20일 밝혔다. 내달 2일까지 배달앱 배달의민족에서 본죽 전 메뉴 구매 시 일일 선착순 4000명에게 최대...";
-        public static String url1 = "https://blog.naver.com/ohmiy0727/223050498189";
-        public static String blogName1 = "재미있는 이야기";
-        public static String datetime1 = "2023-03-20T21:00:26.000+09:00";
-        public static String thumbnail1 = "";
-        public static String title2 = "[강남역] 에스프레소바 파라볼레 PARABOLE";
-        public static String contents2 = "커다란 창이 나있어서 분위기가 좋다";
-        public static String url2 = "http://starbongja.tistory.com/19";
-        public static String blogName2 = "스타봉자";
-        public static String datetime2 = "2023-03-20T21:00:15.000+09:00";
-        public static String thumbnail2 = "https://search1.kakaocdn.net/argon/130x130_85_c/H26sb0LbQF1";
-        public static String title3 = "재택 알바 사기, 통장을 이용하는 범죄";
-        public static String contents3 = "가능이라고 적혀있으며 시급은 15,000원으로 나왔다 근무 상세내용에 대해서는 적혀있지 않았고 얼마 후 내 핸드폰 SMS으로 문자가 왔다 보통 사기꾼들은 <b>카카오</b>톡으로 보내달라고 하는 경우가 많은데 이 사기꾼은 일반문자로 대화를 했다 사기꾼은 사이트 url을 하나 알려주면서 100%는 이해되지 않지만 뭔가 그럴싸...";
-        public static String url3 = "http://leader85.tistory.com/8";
-        public static String blogName3 = "온라인 사기, 범죄";
-        public static String datetime3 = "2023-03-20T23:45:21.000+09:00";
-        public static String thumbnail3 = "https://search3.kakaocdn.net/argon/130x130_85_c/FrrVPjjz6iR";
+    @Test
+    public void getTopTenWord() throws Exception {
+        //given
+        TopTenWordRes topTenWordRes = TopTenWordRes.builder().topTenWordInfos(TopTenProperty.getTopTenWord()).build();
+        when(searchService.getTopTenWord()).thenReturn(topTenWordRes);
+        ConstrainedFields responseFields = new ConstrainedFields(TopTenWordRes.class);
+
+        //when
+        ResultActions result = this.mockMvc.perform(get("/v1/search/top-ten-word"));
+
+        //then
+        result.andDo(MockMvcResultHandlers.print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.topTenWordInfos[0].word").value(topTenWordRes.getTopTenWordInfos().get(0).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[0].count").value(topTenWordRes.getTopTenWordInfos().get(0).getCount()))
+                .andExpect(jsonPath("$.topTenWordInfos[1].word").value(topTenWordRes.getTopTenWordInfos().get(1).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[1].count").value(topTenWordRes.getTopTenWordInfos().get(1).getCount()))
+                .andExpect(jsonPath("$.topTenWordInfos[2].word").value(topTenWordRes.getTopTenWordInfos().get(2).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[2].count").value(topTenWordRes.getTopTenWordInfos().get(2).getCount()))
+                .andExpect(jsonPath("$.topTenWordInfos[3].word").value(topTenWordRes.getTopTenWordInfos().get(3).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[3].count").value(topTenWordRes.getTopTenWordInfos().get(3).getCount()))
+                .andExpect(jsonPath("$.topTenWordInfos[4].word").value(topTenWordRes.getTopTenWordInfos().get(4).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[4].count").value(topTenWordRes.getTopTenWordInfos().get(4).getCount()))
+                .andExpect(jsonPath("$.topTenWordInfos[5].word").value(topTenWordRes.getTopTenWordInfos().get(5).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[5].count").value(topTenWordRes.getTopTenWordInfos().get(5).getCount()))
+                .andExpect(jsonPath("$.topTenWordInfos[6].word").value(topTenWordRes.getTopTenWordInfos().get(6).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[6].count").value(topTenWordRes.getTopTenWordInfos().get(6).getCount()))
+                .andExpect(jsonPath("$.topTenWordInfos[7].word").value(topTenWordRes.getTopTenWordInfos().get(7).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[7].count").value(topTenWordRes.getTopTenWordInfos().get(7).getCount()))
+                .andExpect(jsonPath("$.topTenWordInfos[8].word").value(topTenWordRes.getTopTenWordInfos().get(8).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[8].count").value(topTenWordRes.getTopTenWordInfos().get(8).getCount()))
+                .andExpect(jsonPath("$.topTenWordInfos[9].word").value(topTenWordRes.getTopTenWordInfos().get(9).getWord()))
+                .andExpect(jsonPath("$.topTenWordInfos[9].count").value(topTenWordRes.getTopTenWordInfos().get(9).getCount()))
+                .andDo(document("상위 10개 검색어 수"
+                        , preprocessRequest(prettyPrint())
+                        , preprocessResponse(prettyPrint())
+                        , resource(ResourceSnippetParameters.builder()
+                                .summary("상위 10개 검색어")
+                                .description("상위 10개 검새어")
+                                .tag("Search")
+                                .responseSchema(Schema.schema("TopTenWordRes"))
+                                .responseFields(
+                                        responseFields.withPath("topTenWordInfos").type(JsonFieldType.ARRAY).description("상위 10개 검색어 리스트"),
+                                        responseFields.withPath("topTenWordInfos[0].word").type(JsonFieldType.STRING).description("검색어"),
+                                        responseFields.withPath("topTenWordInfos[0].count").type(JsonFieldType.NUMBER).description("조회수")
+                                )
+                                .build())));
+    }
+
+    private static final class TopTenProperty {
+        private static final String[] wordArray = {"핫팩", "골프거리측정기", "손목보호대", "무릎보호대", "캠핑의자", "요가매트", "침낭", "거리측정기", "허리보호대", "아령"};
+        private static final long[] countArray = {5, 15, 30, 888, 999, 10000, 15541, 18888, 333485, 9948478};
+
+        public static List<TopTenWordInfo> getTopTenWord() {
+            List<TopTenWordInfo> result = new ArrayList<>();
+            for (int i = 0; i < 10; i++) {
+                result.add(TopTenWordInfo.builder().word(wordArray[i]).count(countArray[i]).build());
+            }
+            return result;
+        }
+    }
+
+
+    private static final class BlogInfoProperty {
+        private final static String title1 = "본죽, 임영웅 광고 캠페인 공개 &amp; 할인 프로모션";
+        private final static String contents1 = "판매 수익금 기부, <b>카카오</b>톡 채널 추가 쿠폰 증정  https://naver.me/G5QhNN4b 본죽, 임영웅 광고 캠페인 공개 &amp; 할인 프로모션 본죽이 브랜드 모델 임영웅과 함께 한 광고를 공개하고 2주간 할인 행사를 진행한다고 20일 밝혔다. 내달 2일까지 배달앱 배달의민족에서 본죽 전 메뉴 구매 시 일일 선착순 4000명에게 최대...";
+        private final static String url1 = "https://blog.naver.com/ohmiy0727/223050498189";
+        private final static String blogName1 = "재미있는 이야기";
+        private final static String datetime1 = "2023-03-20T21:00:26.000+09:00";
+        private final static String thumbnail1 = "";
+        private final static String title2 = "[강남역] 에스프레소바 파라볼레 PARABOLE";
+        private final static String contents2 = "커다란 창이 나있어서 분위기가 좋다";
+        private final static String url2 = "http://starbongja.tistory.com/19";
+        private final static String blogName2 = "스타봉자";
+        private final static String datetime2 = "2023-03-20T21:00:15.000+09:00";
+        private final static String thumbnail2 = "https://search1.kakaocdn.net/argon/130x130_85_c/H26sb0LbQF1";
+        private final static String title3 = "재택 알바 사기, 통장을 이용하는 범죄";
+        private final static String contents3 = "가능이라고 적혀있으며 시급은 15,000원으로 나왔다 근무 상세내용에 대해서는 적혀있지 않았고 얼마 후 내 핸드폰 SMS으로 문자가 왔다 보통 사기꾼들은 <b>카카오</b>톡으로 보내달라고 하는 경우가 많은데 이 사기꾼은 일반문자로 대화를 했다 사기꾼은 사이트 url을 하나 알려주면서 100%는 이해되지 않지만 뭔가 그럴싸...";
+        private final static String url3 = "http://leader85.tistory.com/8";
+        private final static String blogName3 = "온라인 사기, 범죄";
+        private final static String datetime3 = "2023-03-20T23:45:21.000+09:00";
+        private final static String thumbnail3 = "https://search3.kakaocdn.net/argon/130x130_85_c/FrrVPjjz6iR";
 
         public static BlogInfo blogInfo1 = BlogInfo.builder()
                 .title(title1)

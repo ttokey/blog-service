@@ -20,10 +20,18 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
-
+      
+  
+  
   jpa:
     hibernate:
       ddl-auto: create
-    properties:
-      hibernate:
-        format_sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+#    show-sql: true
+logging:
+  level:
+    com.zaxxer.hikari.HikariConfig: DEBUG
+    com.zaxxer.hikari: TRACE
+

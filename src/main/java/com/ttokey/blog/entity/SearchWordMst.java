@@ -1,5 +1,6 @@
 package com.ttokey.blog.entity;
 
+import com.ttokey.blog.dto.TopTenWordInfo;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,7 +8,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Index;
 import jakarta.persistence.Table;
-import jakarta.persistence.Version;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -34,8 +34,6 @@ public class SearchWordMst {
     @Column(unique = true)
     String word;
     Long count;
-    @Version
-    Long version;
     @CreationTimestamp
     LocalDateTime insertDate;
     @UpdateTimestamp
@@ -49,6 +47,17 @@ public class SearchWordMst {
 
     public SearchWordHst toHistory() {
         return SearchWordHst.builder().word(this.word).build();
+    }
+
+    public SearchWordTopTen toTopTen() {
+        return SearchWordTopTen.builder().id(this.id).build();
+    }
+
+    public TopTenWordInfo toTopTenWordInfo() {
+        return TopTenWordInfo.builder()
+                .word(this.word)
+                .count(this.count)
+                .build();
     }
 
     public void addCount() {

@@ -10,6 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface SearchWordMstRepository extends JpaRepository<SearchWordMst, Long> {
-    @Lock(LockModeType.PESSIMISTIC_FORCE_INCREMENT)
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     Optional<SearchWordMst> findOneByWord(String word);
 }

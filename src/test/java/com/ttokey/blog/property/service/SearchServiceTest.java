@@ -1,5 +1,6 @@
 package com.ttokey.blog.property.service;
 
+import com.ttokey.blog.component.SearchWordComponent;
 import com.ttokey.blog.dto.BlogInfo;
 import com.ttokey.blog.dto.PageInfo;
 import com.ttokey.blog.dto.SearchBlogReq;
@@ -29,6 +30,8 @@ import static org.mockito.Mockito.when;
 class SearchServiceTest {
     @Mock
     SearchBlogClient searchBlogClient;
+    @Mock
+    SearchWordComponent searchWordComponent;
     @InjectMocks
     SearchService searchService;
 

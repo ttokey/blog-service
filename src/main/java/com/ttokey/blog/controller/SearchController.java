@@ -3,6 +3,7 @@ package com.ttokey.blog.controller;
 import com.ttokey.blog.constant.UrlConstant;
 import com.ttokey.blog.dto.SearchBlogReq;
 import com.ttokey.blog.dto.SearchBlogRes;
+import com.ttokey.blog.dto.TopTenWordRes;
 import com.ttokey.blog.enumeration.SortType;
 import com.ttokey.blog.service.SearchService;
 import jakarta.validation.constraints.NotEmpty;
@@ -28,5 +29,10 @@ public class SearchController {
                 .size(size)
                 .build();
         return searchService.blogSearch(searchBlogReq);
+    }
+
+    @GetMapping(value = UrlConstant.TOP_TEN_WORD)
+    public TopTenWordRes getTopTenWord() {
+        return searchService.getTopTenWord();
     }
 }
