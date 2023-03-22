@@ -17,4 +17,3 @@ public class ExceptionControllerAdvice {
         return exception.getMessage();
     }
 }
-제
