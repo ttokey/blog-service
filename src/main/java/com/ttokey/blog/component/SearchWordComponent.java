@@ -52,6 +52,7 @@ public class SearchWordComponent {
         }
     }
 
+    @Transactional(readOnly = true)
     public List<SearchWordMst> getTopTen() {
         return searchWordTopTenRepository.findAll().stream()
                 .map(searchWordTopTen -> searchWordMstRepository.findById(searchWordTopTen.getId()).get())
@@ -66,13 +67,5 @@ public class SearchWordComponent {
             return 0;
         }
         return -1;
-    }
-
-
-    @Transactional
-    public Long getCount(String word) {
-        SearchWordMst searchWordMst = searchWordMstRepository.findOneByWord(word)
-                .orElseGet(() -> SearchWordMst.builder().word(word).build());
-        return searchWordMst.getCount();
     }
 }
