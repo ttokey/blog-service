@@ -2,7 +2,7 @@
 
 ## jar파일 위치
 
-https://github.com/ttokey/blog-service/blob/master/ttokey-blog-service-0.0.1-SNAPSHOT.jar
+https://github.com/ttokey/blog-service/raw/master/ttokey-blog-service-0.0.1-SNAPSHOT.jar
 
 ## API 설명
 
