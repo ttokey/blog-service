@@ -100,7 +100,7 @@ class KakaoSearchBlogResTest {
         SearchBlogRes expect = SearchBlogRes.builder()
                 .blogType(BlogType.KAKAO)
                 .pageInfo(pageInfo)
-                .blogInfoList(blogInfoList)
+                .blogInfos(blogInfoList)
                 .build();
 
         //when

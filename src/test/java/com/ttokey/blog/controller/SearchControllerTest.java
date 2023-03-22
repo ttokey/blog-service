@@ -79,11 +79,11 @@ public class SearchControllerTest {
                 .isEnd(isEnd)
                 .build();
 
-        List<BlogInfo> blogInfoList = Arrays.asList(BlogInfoProperty.blogInfo1, BlogInfoProperty.blogInfo2, BlogInfoProperty.blogInfo3);
+        List<BlogInfo> blogInfos = Arrays.asList(BlogInfoProperty.blogInfo1, BlogInfoProperty.blogInfo2, BlogInfoProperty.blogInfo3);
         SearchBlogRes searchBlogRes = SearchBlogRes.builder()
                 .blogType(BlogType.KAKAO)
                 .pageInfo(pageInfo)
-                .blogInfoList(blogInfoList)
+                .blogInfos(blogInfos)
                 .build();
         when(searchService.blogSearch(any(SearchBlogReq.class))).thenReturn(searchBlogRes);
 
@@ -110,28 +110,28 @@ public class SearchControllerTest {
                 .andExpect(jsonPath("$.pageInfo.totalCount").value(searchBlogRes.getPageInfo().getTotalCount()))
                 .andExpect(jsonPath("$.pageInfo.size").value(searchBlogRes.getPageInfo().getSize()))
                 .andExpect(jsonPath("$.pageInfo.isEnd").value(searchBlogRes.getPageInfo().getIsEnd()))
-                .andExpect(jsonPath("$.blogInfoList", hasSize(blogInfoList.size())))
-                .andExpect(jsonPath("$.blogInfoList[0].title").value(searchBlogRes.getBlogInfoList().get(0).getTitle()))
-                .andExpect(jsonPath("$.blogInfoList[0].contents").value(searchBlogRes.getBlogInfoList().get(0).getContents()))
-                .andExpect(jsonPath("$.blogInfoList[0].url").value(searchBlogRes.getBlogInfoList().get(0).getUrl()))
-                .andExpect(jsonPath("$.blogInfoList[0].blogName").value(searchBlogRes.getBlogInfoList().get(0).getBlogName()))
-                .andExpect(jsonPath("$.blogInfoList[0].dateTime").value(searchBlogRes.getBlogInfoList().get(0).getDateTime()))
-                .andExpect(jsonPath("$.blogInfoList[0].thumbnail").value(searchBlogRes.getBlogInfoList().get(0).getThumbnail()))
-                .andExpect(jsonPath("$.blogInfoList[0].bloggerLink").isEmpty())
-                .andExpect(jsonPath("$.blogInfoList[1].title").value(searchBlogRes.getBlogInfoList().get(1).getTitle()))
-                .andExpect(jsonPath("$.blogInfoList[1].contents").value(searchBlogRes.getBlogInfoList().get(1).getContents()))
-                .andExpect(jsonPath("$.blogInfoList[1].url").value(searchBlogRes.getBlogInfoList().get(1).getUrl()))
-                .andExpect(jsonPath("$.blogInfoList[1].blogName").value(searchBlogRes.getBlogInfoList().get(1).getBlogName()))
-                .andExpect(jsonPath("$.blogInfoList[1].dateTime").value(searchBlogRes.getBlogInfoList().get(1).getDateTime()))
-                .andExpect(jsonPath("$.blogInfoList[1].thumbnail").value(searchBlogRes.getBlogInfoList().get(1).getThumbnail()))
-                .andExpect(jsonPath("$.blogInfoList[1].bloggerLink").isEmpty())
-                .andExpect(jsonPath("$.blogInfoList[2].title").value(searchBlogRes.getBlogInfoList().get(2).getTitle()))
-                .andExpect(jsonPath("$.blogInfoList[2].contents").value(searchBlogRes.getBlogInfoList().get(2).getContents()))
-                .andExpect(jsonPath("$.blogInfoList[2].url").value(searchBlogRes.getBlogInfoList().get(2).getUrl()))
-                .andExpect(jsonPath("$.blogInfoList[2].blogName").value(searchBlogRes.getBlogInfoList().get(2).getBlogName()))
-                .andExpect(jsonPath("$.blogInfoList[2].dateTime").value(searchBlogRes.getBlogInfoList().get(2).getDateTime()))
-                .andExpect(jsonPath("$.blogInfoList[2].thumbnail").value(searchBlogRes.getBlogInfoList().get(2).getThumbnail()))
-                .andExpect(jsonPath("$.blogInfoList[2].bloggerLink").isEmpty())
+                .andExpect(jsonPath("$.blogInfos", hasSize(blogInfos.size())))
+                .andExpect(jsonPath("$.blogInfos[0].title").value(searchBlogRes.getBlogInfos().get(0).getTitle()))
+                .andExpect(jsonPath("$.blogInfos[0].contents").value(searchBlogRes.getBlogInfos().get(0).getContents()))
+                .andExpect(jsonPath("$.blogInfos[0].url").value(searchBlogRes.getBlogInfos().get(0).getUrl()))
+                .andExpect(jsonPath("$.blogInfos[0].blogName").value(searchBlogRes.getBlogInfos().get(0).getBlogName()))
+                .andExpect(jsonPath("$.blogInfos[0].dateTime").value(searchBlogRes.getBlogInfos().get(0).getDateTime()))
+                .andExpect(jsonPath("$.blogInfos[0].thumbnail").value(searchBlogRes.getBlogInfos().get(0).getThumbnail()))
+                .andExpect(jsonPath("$.blogInfos[0].bloggerLink").isEmpty())
+                .andExpect(jsonPath("$.blogInfos[1].title").value(searchBlogRes.getBlogInfos().get(1).getTitle()))
+                .andExpect(jsonPath("$.blogInfos[1].contents").value(searchBlogRes.getBlogInfos().get(1).getContents()))
+                .andExpect(jsonPath("$.blogInfos[1].url").value(searchBlogRes.getBlogInfos().get(1).getUrl()))
+                .andExpect(jsonPath("$.blogInfos[1].blogName").value(searchBlogRes.getBlogInfos().get(1).getBlogName()))
+                .andExpect(jsonPath("$.blogInfos[1].dateTime").value(searchBlogRes.getBlogInfos().get(1).getDateTime()))
+                .andExpect(jsonPath("$.blogInfos[1].thumbnail").value(searchBlogRes.getBlogInfos().get(1).getThumbnail()))
+                .andExpect(jsonPath("$.blogInfos[1].bloggerLink").isEmpty())
+                .andExpect(jsonPath("$.blogInfos[2].title").value(searchBlogRes.getBlogInfos().get(2).getTitle()))
+                .andExpect(jsonPath("$.blogInfos[2].contents").value(searchBlogRes.getBlogInfos().get(2).getContents()))
+                .andExpect(jsonPath("$.blogInfos[2].url").value(searchBlogRes.getBlogInfos().get(2).getUrl()))
+                .andExpect(jsonPath("$.blogInfos[2].blogName").value(searchBlogRes.getBlogInfos().get(2).getBlogName()))
+                .andExpect(jsonPath("$.blogInfos[2].dateTime").value(searchBlogRes.getBlogInfos().get(2).getDateTime()))
+                .andExpect(jsonPath("$.blogInfos[2].thumbnail").value(searchBlogRes.getBlogInfos().get(2).getThumbnail()))
+                .andExpect(jsonPath("$.blogInfos[2].bloggerLink").isEmpty())
                 .andDo(document("kakao blog 검색 결과"
                         , preprocessRequest(prettyPrint())
                         , preprocessResponse(prettyPrint())
@@ -154,14 +154,14 @@ public class SearchControllerTest {
                                         responseFields.withPath("pageInfo.totalCount").type(JsonFieldType.NUMBER).description("전체 검색 결과 크기"),
                                         responseFields.withPath("pageInfo.size").type(JsonFieldType.NUMBER).description("페이지 크기"),
                                         responseFields.withPath("pageInfo.isEnd").type(JsonFieldType.BOOLEAN).description("마지막 페이지 여부"),
-                                        responseFields.withPath("blogInfoList").type(JsonFieldType.ARRAY).description("검색 결과 리스트"),
-                                        responseFields.withPath("blogInfoList[0].title").type(JsonFieldType.STRING).description("블로그 제목"),
-                                        responseFields.withPath("blogInfoList[0].contents").type(JsonFieldType.STRING).description("블로그 내용"),
-                                        responseFields.withPath("blogInfoList[0].url").type(JsonFieldType.STRING).description("블로그 주소"),
-                                        responseFields.withPath("blogInfoList[0].blogName").type(JsonFieldType.STRING).description("블로그 명"),
-                                        responseFields.withPath("blogInfoList[0].dateTime").type(JsonFieldType.STRING).description("글 생성 시간"),
-                                        responseFields.withPath("blogInfoList[0].thumbnail").type(JsonFieldType.STRING).description("썸네일 주쇼").optional(),
-                                        responseFields.withPath("blogInfoList[0].bloggerLink").type(JsonFieldType.STRING).description("블로그 대표 주소").optional()
+                                        responseFields.withPath("blogInfos").type(JsonFieldType.ARRAY).description("검색 결과 리스트"),
+                                        responseFields.withPath("blogInfos[0].title").type(JsonFieldType.STRING).description("블로그 제목"),
+                                        responseFields.withPath("blogInfos[0].contents").type(JsonFieldType.STRING).description("블로그 내용"),
+                                        responseFields.withPath("blogInfos[0].url").type(JsonFieldType.STRING).description("블로그 주소"),
+                                        responseFields.withPath("blogInfos[0].blogName").type(JsonFieldType.STRING).description("블로그 명"),
+                                        responseFields.withPath("blogInfos[0].dateTime").type(JsonFieldType.STRING).description("글 생성 시간"),
+                                        responseFields.withPath("blogInfos[0].thumbnail").type(JsonFieldType.STRING).description("썸네일 주쇼").optional(),
+                                        responseFields.withPath("blogInfos[0].bloggerLink").type(JsonFieldType.STRING).description("블로그 대표 주소").optional()
                                 )
                                 .build())));
     }
@@ -221,7 +221,7 @@ public class SearchControllerTest {
 
         public static List<TopTenWordInfo> getTopTenWord() {
             List<TopTenWordInfo> result = new ArrayList<>();
-            for (int i = 0; i < 10; i++) {
+            for (int i = 9; i >= 0; i--) {
                 result.add(TopTenWordInfo.builder().word(wordArray[i]).count(countArray[i]).build());
             }
             return result;

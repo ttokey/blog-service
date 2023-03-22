@@ -16,5 +16,5 @@ import java.util.List;
 public class SearchBlogRes {
     BlogType blogType;
     PageInfo pageInfo;
-    List<BlogInfo> blogInfoList;
+    List<BlogInfo> blogInfos;
 }

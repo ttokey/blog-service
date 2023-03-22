@@ -71,7 +71,7 @@ public class NaverSearchBlogRes implements SearchBlog {
         return SearchBlogRes.builder()
                 .blogType(BlogType.NAVER)
                 .pageInfo(pageInfo)
-                .blogInfoList(toBlogInfoList())
+                .blogInfos(toBlogInfoList())
                 .build();
     }
 

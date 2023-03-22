@@ -106,7 +106,7 @@ class NaverSearchBlogResTest {
         SearchBlogRes expect = SearchBlogRes.builder()
                 .blogType(BlogType.NAVER)
                 .pageInfo(pageInfo)
-                .blogInfoList(blogInfoList)
+                .blogInfos(blogInfoList)
                 .build();
 
         //when

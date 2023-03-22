@@ -139,16 +139,16 @@ class SearchWordComponentTest {
             searchWordTopTenList.add(searchWordMst.toTopTen());
         }
         List<SearchWordTopTen> expect = new ArrayList<>();
-        expect.add(searchWordTopTenList.get(6));
-        expect.add(searchWordTopTenList.get(5));
-        expect.add(searchWordTopTenList.get(1));
-        expect.add(searchWordTopTenList.get(4));
-        expect.add(searchWordTopTenList.get(7));
-        expect.add(searchWordTopTenList.get(8));
-        expect.add(searchWordTopTenList.get(9));
-        expect.add(searchWordTopTenList.get(3));
-        expect.add(searchWordTopTenList.get(0));
         expect.add(searchWordTopTenList.get(2));
+        expect.add(searchWordTopTenList.get(0));
+        expect.add(searchWordTopTenList.get(3));
+        expect.add(searchWordTopTenList.get(9));
+        expect.add(searchWordTopTenList.get(8));
+        expect.add(searchWordTopTenList.get(7));
+        expect.add(searchWordTopTenList.get(4));
+        expect.add(searchWordTopTenList.get(1));
+        expect.add(searchWordTopTenList.get(5));
+        expect.add(searchWordTopTenList.get(6));
 
 
         //when
@@ -168,7 +168,7 @@ class SearchWordComponentTest {
         List<String> wordList = Arrays.asList("카카오", "네이버", "이석희", "동시성", "제어", "테스트문구1", "테스트2", "테스트3", "테스트4", "테스트5", "테스트6");
         List<Integer> countList = Arrays.asList(99, 13, 1000, 91, 15, 9, 5, 17, 20, 23, 10);
         List<SearchWordMst> expect = new ArrayList<>();
-        int[] expectIndexArray = {5, 10, 1, 4, 7, 8, 9, 3, 0, 2};
+        int[] expectIndexArray = {2, 0, 3, 9, 8, 7, 4, 1, 10, 5};
         for (int expectIndex : expectIndexArray) {
             expect.add(makeSearchWordMst(wordList.get(expectIndex), countList.get(expectIndex)));
         }
@@ -196,7 +196,7 @@ class SearchWordComponentTest {
 
         CountDownLatch latch = new CountDownLatch(502);
         List<SearchWordMst> expect = new ArrayList<>();
-        int[] expectIndexArray = {5, 10, 1, 4, 7, 8, 9, 3, 0, 2};
+        int[] expectIndexArray = {2, 0, 3, 9, 8, 7, 4, 1, 10, 5};
         for (int expectIndex : expectIndexArray) {
             expect.add(makeSearchWordMst(wordList.get(expectIndex), countList.get(expectIndex)));
         }

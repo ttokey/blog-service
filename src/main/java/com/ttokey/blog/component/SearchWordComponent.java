@@ -46,8 +46,8 @@ public class SearchWordComponent {
             searchWordTopTenRepository.save(input.toTopTen());
             return;
         }
-        if (topTenList.get(0).getCount() <= input.getCount()) {
-            searchWordTopTenRepository.deleteById(topTenList.get(0).getId());
+        if (topTenList.get(topTenList.size() - 1).getCount() <= input.getCount()) {
+            searchWordTopTenRepository.deleteById(topTenList.get(topTenList.size() - 1).getId());
             searchWordTopTenRepository.save(input.toTopTen());
         }
     }
@@ -61,11 +61,11 @@ public class SearchWordComponent {
 
     private int compareSearchWordMst(SearchWordMst a, SearchWordMst b) {
         if (a.getCount() < b.getCount()) {
-            return -1;
+            return 1;
         } else if (Objects.equals(a.getCount(), b.getCount())) {
             return 0;
         }
-        return 1;
+        return -1;
     }
 
 

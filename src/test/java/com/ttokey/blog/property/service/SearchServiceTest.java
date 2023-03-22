@@ -122,7 +122,7 @@ class SearchServiceTest {
         SearchBlogRes expect = SearchBlogRes.builder()
                 .blogType(BlogType.KAKAO)
                 .pageInfo(pageInfo)
-                .blogInfoList(blogInfoList)
+                .blogInfos(blogInfoList)
                 .build();
 
         when(searchBlogClient.searchBlog(any(KakaoSearchBlogReq.class))).thenReturn(kakaoSearchBlogRes);

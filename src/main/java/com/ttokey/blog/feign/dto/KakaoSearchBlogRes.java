@@ -81,7 +81,7 @@ public class KakaoSearchBlogRes implements SearchBlog {
         return SearchBlogRes.builder()
                 .blogType(BlogType.KAKAO)
                 .pageInfo(pageInfo)
-                .blogInfoList(toBlogInfoList())
+                .blogInfos(toBlogInfoList())
                 .build();
     }
 
