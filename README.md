@@ -1,5 +1,11 @@
 # blog-service
 
+## jar파일 위치
+
+https://github.com/ttokey/blog-service/blob/master/ttokey-blog-service-0.0.1-SNAPSHOT.jar
+
+## API 설명
+
 2가지 api를 제공하고 있다
 
 1. blog 검색 서비스.
